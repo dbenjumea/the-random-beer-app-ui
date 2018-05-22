@@ -9,7 +9,8 @@ import {BeersService} from './service/beers.service';
   styleUrls: ['./app.component.css'],
   providers: [BeersService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  title = 'The Random Beer App';
   beers: Beer[];
   beer: Beer;
   beersCount: number;
@@ -17,17 +18,15 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private service: BeersService) {
   }
 
-  ngOnInit(): void {
-    this.service.getCountOfBeers().subscribe(
-        response => this.beersCount = response
-    );
-  }
   getRandomBeer(): void {
     const randomId = Math.floor(Math.random() * this.beersCount) + 1;
     this.service.getBeerRandomService(randomId).subscribe(
           response => this.beer = response);
   }
   onClick(): void {
+    this.service.getCountOfBeers().subscribe(
+          response => this.beersCount = response
+    );
     this.getRandomBeer();
   }
 }
