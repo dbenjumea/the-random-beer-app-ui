@@ -1,0 +1,12 @@
+version: '2'
+services:
+  the-random-beer-app-ui:
+    container_name: the-random-beer-app-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '80:80'
